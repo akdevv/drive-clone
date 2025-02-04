@@ -1,7 +1,9 @@
-import { Folder, File } from "~/lib/mock-data";
+import type { files, folders } from "~/server/db/schema";
 import { Folder as FolderIcon, File as FileIcon } from "lucide-react";
 
-export function FileRow({ file }: { file: File }) {
+export function FileRow(props: { file: typeof files.$inferSelect }) {
+  const { file } = props;
+
   return (
     <li
       key={file.id}
@@ -10,7 +12,7 @@ export function FileRow({ file }: { file: File }) {
       <div className="grid grid-cols-12 items-center gap-4">
         <div className="col-span-6 flex items-center">
           <a
-            href={file.url}
+            href={""}
             className="flex items-center text-gray-100 hover:text-blue-400"
             target="_blank"
           >
@@ -29,7 +31,7 @@ export function FolderRow({
   folder,
   handleFolderClick,
 }: {
-  folder: Folder;
+  folder: typeof folders.$inferSelect;
   handleFolderClick: () => void;
 }) {
   return (
