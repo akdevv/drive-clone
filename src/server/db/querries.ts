@@ -8,21 +8,23 @@ import { db } from "~/server/db";
 import { eq } from "drizzle-orm";
 
 export const QUERIES = {
-  getFiles: (folderId: number) => {
+  getFiles: function (folderId: number) {
     return db
       .select()
       .from(filesSchema)
-      .where(eq(filesSchema.parent, folderId));
+      .where(eq(filesSchema.parent, folderId))
+      .orderBy(filesSchema.id);
   },
 
-  getFolders: (folderId: number) => {
+  getFolders: function (folderId: number) {
     return db
       .select()
       .from(foldersSchema)
-      .where(eq(foldersSchema.parent, folderId));
+      .where(eq(foldersSchema.parent, folderId))
+      .orderBy(foldersSchema.id);
   },
 
-  getAllParentsForFolder: async (folderId: number) => {
+  getAllParentsForFolder: async function (folderId: number) {
     const parents = [];
     let currentId: number | null = folderId;
     while (currentId !== null) {
@@ -42,7 +44,7 @@ export const QUERIES = {
     return parents;
   },
 
-  getFolderById: async (folderId: number) => {
+  getFolderById: async function (folderId: number) {
     const folder = await db
       .select()
       .from(foldersSchema)

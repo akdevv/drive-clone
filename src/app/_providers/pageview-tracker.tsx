@@ -20,7 +20,11 @@ export default function PostHogPageView(): null {
     } else {
       posthog.reset();
     }
-  }, [userInfo.user?.id, posthog]);
+  }, [
+    posthog,
+    userInfo.user?.id,
+    userInfo.user?.emailAddresses?.[0]?.emailAddress,
+  ]);
 
   // Track pageviews
   useEffect(() => {
