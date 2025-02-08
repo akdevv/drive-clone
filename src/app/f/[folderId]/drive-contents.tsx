@@ -51,6 +51,7 @@ export default function DriveContents(props: {
               <div className="col-span-6">Name</div>
               <div className="col-span-3">Type</div>
               <div className="col-span-3">Size</div>
+              <div className="col-span-1"></div>
             </div>
           </div>
           <ul>
